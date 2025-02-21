@@ -1,0 +1,19 @@
+{
+  "name": "learning-playwright",
+  "version": "1.0.0",
+  "main": "index.js",
+  
+  "scripts": {
+
+    "tests:api": "set NODE_TLS_REJECT_UNAUTHORIZED=0 && playwright test tests/api/ApiTest.spec.ts --config=playwright.config.ts --project=Chromium",
+    "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.50.1",
+    "@types/node": "^22.13.1"
+  }
+}
