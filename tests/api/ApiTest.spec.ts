@@ -50,7 +50,7 @@ test('POST Request - Login', async ({ request }) => {
    
     const responseBody = JSON.parse(await response.text());
     expect(response.status()).toBe(201);
-    expect(responseBody.token).toBeTruthy
+    expect(responseBody.token).toBeTruthy();
     console.log(responseBody);
   });
 

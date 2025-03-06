@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import ENV from "./utils/env";
 
 /**
  * Read environment variables from file.
@@ -7,7 +9,10 @@ import { defineConfig, devices } from '@playwright/test';
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
-
+require('dotenv').config({
+  path: `./env/.env.${process.env.ENV}`,
+  override: true
+});
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -25,11 +30,15 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    //storageState: "tests/e2e/storageState.json", // Load stored session
+    //baseURL: ENV.URL,
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    video: "retain-on-failure",
+    screenshot: "only-on-failure",
   },
 
   /* Configure projects for major browsers */
