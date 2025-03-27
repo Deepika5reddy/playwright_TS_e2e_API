@@ -1,12 +1,14 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { AbstractPage } from './AbstractPage';
 
-export class ProductGridPage {
-    readonly page: Page;
+export class ProductGridPage extends AbstractPage {
+    //readonly page: Page;
     readonly productGrid: Locator;
     readonly productItems: Locator;
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
+        //this.page = page;
         this.productGrid = page.locator('div.row[data-grid*="product-layout product-grid"]'); 
         this.productItems = page.locator('div.product-layout.product-grid'); 
     }

@@ -1,4 +1,16 @@
 
+import test from "node:test";
+import { text } from "stream/consumers";
+const crypto = require('crypto');
+
+
+export default class helper{
+}
+
+export async function getRandomName() {
+    return crypto.randomBytes(20).toString('hex');
+}
+    
 
 let fname : string; //typerannotation
 let age: number;
@@ -7,7 +19,7 @@ fname = "deepika"; //type inference in compile time
 age = 30;
 let number = 50; // type inference in runtime
 
-function getNumber(): number {
+ function getNumber(): number {
   return 10;
 }
 
@@ -116,3 +128,24 @@ function removeWhiteSpaces(): string {
     let str = "   I Love Automation";
     return str.replace(/\s/g, '');
 }
+
+test('String Manipulation', async () => {   
+   // await page.locator('input[name="search"]').fill("deepika");
+    //await page.locator('button[type="submit"]').click();
+
+   // text await page.loactor('text= sometext').click();
+   //css selector
+    //await page.locator('button').click();
+    //await page.locator('#id').click(); use id name in actual code
+    //await page.locator('.class').click();
+
+    //only visible elements
+    //await page.locator('submit-button:visible').click();
+
+    //combination
+    //await page.locator('#username .first').click();
+
+    //xpath
+    //await page.locator('//button').click();
+
+}   );

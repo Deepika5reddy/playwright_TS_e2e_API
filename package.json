@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "tests:api": "set NODE_TLS_REJECT_UNAUTHORIZED=0 && playwright test tests/api/ApiTest.spec.ts --config=playwright.config.ts --project=Chromium",
-    "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium"
+    "tests:chrome": "playwright test --config=playwright.config.ts --project=Chromium",
+    "tests:screenshot": "npx playwright test tests/e2e/ValidateScreenshot.spec.ts "
   },
   "keywords": [],
   "author": "",
