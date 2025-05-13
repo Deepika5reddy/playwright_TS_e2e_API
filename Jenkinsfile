@@ -7,11 +7,11 @@ pipeline {
     }
 
     tools {
-        nodejs 'nodejs-22-14-0' // Ensure this NodeJS tool is set up in Jenkins Global Tools
+        nodejs 'nodejs-22-14-0' // Ensure this is set up in Jenkins Global Tool Configuration
     }
 
     triggers {
-        pollSCM('* * * * *') // Optional fallback, still webhook-friendly
+        pollSCM('* * * * *') // Optional: use webhook for better efficiency
     }
 
     stages {
@@ -23,41 +23,37 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                    bat 'npm ci'
-                }
+                bat 'npm ci'
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                    bat 'npx playwright install'
-                
+                bat 'npx playwright install'
             }
         }
 
         stage('Run Tests') {
             steps {
-                
-                    bat """
-                      echo ENV=${params.ENV} > .env
-                        npx playwright test --reporter=html
-                    """
-                
+                bat """
+                    echo ENV=${params.ENV} > .env
+                    npx playwright test --reporter=html
+                """
             }
         }
 
         stage('Publish Report') {
             steps {
-              dir('playwright_TS_e2e_API/playwright-report') {
-            archiveArtifacts artifacts: '**/*', fingerprint: true
-            publishHTML(target: [
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: '.',
-                reportFiles: 'index.html',
-                reportName: 'Playwright HTML Report'
-            ])
+                dir('playwright-report') {
+                    archiveArtifacts artifacts: '**/*', fingerprint: true
+                    publishHTML(target: [
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: '.',
+                        reportFiles: 'index.html',
+                        reportName: 'Playwright HTML Report'
+                    ])
                 }
             }
         }
