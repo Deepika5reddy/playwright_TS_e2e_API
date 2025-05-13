@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        NODE_ENV = 'test'
+        TEST_ENV = "${params.ENV}" 
         TEST_ENV = "${params.TEST_ENV}"
        
     }
@@ -47,9 +47,9 @@ pipeline {
             steps {
                 dir('officepl-playwright-automation') {
                     bat """
-                        echo TEST_ENV=${TEST_ENV} > .env
-                        echo BASE_API_URL=https://officepl-api-settings-${TEST_ENV}.example.com >> .env
-                        npx playwright test  
+                      echo TEST_ENV=${TEST_ENV} > .env
+                      echo BASE_API_URL=https://officepl-api-settings-${TEST_ENV}.example.com >> .env
+                     npx playwright test --reporter=html
                     """
                 }
             }
