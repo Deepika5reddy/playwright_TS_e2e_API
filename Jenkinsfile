@@ -23,7 +23,6 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir('officepl-playwright-automation') {
                     bat 'npm ci'
                 }
             }
@@ -31,9 +30,8 @@ pipeline {
 
         stage('Install Playwright Browsers') {
             steps {
-                dir('officepl-playwright-automation') {
                     bat 'npx playwright install'
-                }
+                
             }
         }
 
@@ -50,16 +48,16 @@ pipeline {
 
         stage('Publish Report') {
             steps {
-                dir('officepl-playwright-automation\\playwright-report') {
-                    archiveArtifacts artifacts: '**/*', fingerprint: true
-                    publishHTML(target: [
-                        allowMissing: false,
-                        alwaysLinkToLastBuild: true,
-                        keepAll: true,
-                        reportDir: '.',
-                        reportFiles: 'index.html',
-                        reportName: 'Playwright HTML Report'
-                    ])
+              dir('playwright_TS_e2e_API/playwright-report') {
+            archiveArtifacts artifacts: '**/*', fingerprint: true
+            publishHTML(target: [
+                allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: '.',
+                reportFiles: 'index.html',
+                reportName: 'Playwright HTML Report'
+            ])
                 }
             }
         }
