@@ -13,7 +13,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'Node_18' // Ensure this NodeJS tool is set up in Jenkins Global Tools
+        nodejs 'nodejs-22-14-0' // Ensure this NodeJS tool is set up in Jenkins Global Tools
     }
 
     triggers {
