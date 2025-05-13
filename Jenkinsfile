@@ -39,13 +39,12 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                dir('officepl-playwright-automation') {
+                
                     bat """
                       echo ENV=${params.ENV} > .env
-                        echo BASE_API_URL=https://officepl-api-settings-${params.ENV}.example.com >> .env
                         npx playwright test --reporter=html
                     """
-                }
+                
             }
         }
 
