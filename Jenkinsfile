@@ -2,14 +2,8 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'ENV', defaultValue: 'prod', description: 'Target test environment (e.g., local, qa)')
+        string(name: 'ENV', defaultValue: 'prod', description: 'Target test environment (e.g., local, prod)')
         choice(name: 'TYPE_OF_TEST', choices: ['smoke', 'regression'], description: 'Select type of test to run')
-    }
-
-    environment {
-        TEST_ENV = "${params.ENV}" 
-        TEST_ENV = "${params.TEST_ENV}"
-       
     }
 
     tools {
@@ -47,9 +41,9 @@ pipeline {
             steps {
                 dir('officepl-playwright-automation') {
                     bat """
-                      echo TEST_ENV=${TEST_ENV} > .env
-                      echo BASE_API_URL=https://officepl-api-settings-${TEST_ENV}.example.com >> .env
-                     npx playwright test --reporter=html
+                      echo ENV=${params.ENV} > .env
+                        echo BASE_API_URL=https://officepl-api-settings-${params.ENV}.example.com >> .env
+                        npx playwright test --reporter=html
                     """
                 }
             }
