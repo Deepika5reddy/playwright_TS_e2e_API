@@ -9,7 +9,7 @@ pipeline {
     environment {
         NODE_ENV = 'test'
         TEST_ENV = "${params.TEST_ENV}"
-        TYPE_OF_TEST = "${params.TYPE_OF_TEST}"
+       
     }
 
     tools {
@@ -49,7 +49,7 @@ pipeline {
                     bat """
                         echo TEST_ENV=${TEST_ENV} > .env
                         echo BASE_API_URL=https://officepl-api-settings-${TEST_ENV}.example.com >> .env
-                        npx playwright test --project=${TYPE_OF_TEST} --reporter=html
+                        npx playwright test  
                     """
                 }
             }
