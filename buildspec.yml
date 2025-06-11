@@ -17,12 +17,6 @@ phases:
       - echo "Running all Playwright tests..."
       - npx playwright test
 
-  post_build:
-    commands:
-      - echo "Uploading report to S3: playwright-ci..."
-      - aws s3 cp playwright-report/ s3://playwright-ci/playwright-report/ --recursive
 
-artifacts:
-  files:
-    - playwright-report/**/*
-  discard-paths: no
+
+
