@@ -14,7 +14,7 @@ phases:
 
   build:
     commands:
-      - echo "Running all Playwright tests..."
+      - echo "Running all Playwright tests...."
       - npx playwright test
 
 
