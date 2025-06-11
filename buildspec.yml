@@ -14,8 +14,14 @@ phases:
 
   build:
     commands:
-      - echo "Running all Playwright tests...."
+      - echo "Running all Playwright tests..."
       - npx playwright test
+
+  post_build:
+    commands:
+      - echo "Uploading Playwright report to S3..."
+      - TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
+      - aws s3 cp playwright-report/ s3://your-s3-bucket-name/reports/$TIMESTAMP/ --recursive
 
 artifacts:
   files:
