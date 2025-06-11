@@ -7,7 +7,7 @@ phases:
     commands:
       - echo "Installing dependencies..."
       - npm ci
-      - echo "Installing Playwright..."
+      - echo "Installing Playwright browsers and system dependencies..."
       - npx playwright install --with-deps
       - echo "Setting ENV=local..."
       - export ENV=local
@@ -17,6 +17,7 @@ phases:
       - echo "Running all Playwright tests...."
       - npx playwright test
 
-
-
-
+artifacts:
+  files:
+    - playwright-report/**/*
+  discard-paths: no
