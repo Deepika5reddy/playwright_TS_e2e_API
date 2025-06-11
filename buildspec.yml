@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+    commands:
+      - echo "Installing dependencies..."
+      - npm ci
+      - echo "Installing Playwright..."
+      - npx playwright install --with-deps
+      - echo "Setting ENV=local..."
+      - export ENV=local
+
+  build:
+    commands:
+      - echo "Running all Playwright tests..."
+      - npx playwright test
+
+  post_build:
+    commands:
+      - echo "Uploading report to S3: playwright-ci..."
+      - aws s3 cp playwright-report/ s3://playwright-ci/playwright-report/ --recursive
+
+artifacts:
+  files:
+    - playwright-report/**/*
+  discard-paths: no
