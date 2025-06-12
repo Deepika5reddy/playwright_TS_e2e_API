@@ -21,7 +21,7 @@ phases:
     commands:
       - echo "Uploading Playwright report to S3..."
       - TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
-      - aws s3 cp playwright-report/ s3://your-s3-bucket-name/reports/$TIMESTAMP/ --recursive
+      - aws s3 cp playwright-report/ s3://playwright-ci/reports/$TIMESTAMP/ --recursive
 
 artifacts:
   files:
